@@ -69,7 +69,7 @@
                                 .attr("value", settings.browseButtonValue)
                                 .on("click", function () { $fileInput.click(); })
             
-          , $uploadIframe   = $(settings.uploadIframe)
+          , $uploadIframe   = $("<iframe>")
                                 .attr("id", "uploadIframe-" + Math.random().toString(36).substring(5, 20).toUpperCase())
                                 .hide()
 
@@ -78,7 +78,8 @@
                                 .addClass(settings.formClass)
                                 .attr("target", $uploadIframe.attr("id"))
                                 .attr("enctype", "multipart/form-data")
-                                .attr("method", "post");
+                                .attr("method", "post")
+                                .attr("action", settings.formAction);
 
 
         // append controls to form
@@ -137,6 +138,7 @@
                 // replace the file input
                 $fileInput.replaceWith($fileInput.clone(true));
             });
+
         });
     };
 })($);
