@@ -147,6 +147,7 @@
 
                 // upadte the image source
                 $self.attr("src", result);
+                $self.trigger("imageChanged");
 
                 // replace the file input
                 $fileInput.replaceWith($fileInput.clone(true));
