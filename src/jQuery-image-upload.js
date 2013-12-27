@@ -147,6 +147,8 @@
 
                 // upadte the image source
                 $self.attr("src", result);
+
+                // trigger image changed event
                 $self.trigger("imageChanged");
 
                 // replace the file input
@@ -154,32 +156,47 @@
             });
         });
 
-        // append controls to image wrapper
+        // no hover
         if (!settings.hover) {
+
+            // append controls to image wrapper
             $self.parent().append($controls);
         } else {
 
+            // get the self offset
             var offset = $self.offset();
+
+            // set absolute position to controls and set the offset
             $controls.css({
                 position: "absolute",
                 top: offset.top,
                 left: offset.left
+            // add class to controls
             }).addClass("jQuery-image-upload-controls");
 
-            $self.data("controls", $controls);
+            // append controls to body
             $("body").append($controls.hide());
 
+            // self on mouse enter
             $self.on("mouseenter", function () {
-                var $thisImg = $(this)
+
+                // show controls
                 $controls.show();
             });
 
-            $('body').on("mouseleave", "." + settings.addClass, function (e) {
+            // on mouse leave
+            $("body").on("mouseleave", "." + settings.addClass, function (e) {
 
+                // get position
                 var o = $self.position()
+
+                    // width
                   , w = $self.width()
+
+                    // and the hegiht
                   , h = $self.height();
 
+                // hide controls
                 if ((e.pageX < o.left || e.pageX > o.left + w) ||
                     (e.pageY < o.top || e.pageY > o.top + h)) {
                     $controls.hide();
@@ -187,6 +204,7 @@
             });
         }
 
+        // return selected element
         return $self;
     };
 })($);
