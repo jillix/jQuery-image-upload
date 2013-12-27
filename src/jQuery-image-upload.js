@@ -52,7 +52,7 @@
             $self.each(function () {
                 $(this).imageUpload(settings);
             });
-            return;
+            return $self;
         }
 
         $self.addClass(settings.addClass);
@@ -185,5 +185,7 @@
                 }
             });
         }
+
+        return $self;
     };
 })($);
