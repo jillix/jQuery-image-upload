@@ -37,11 +37,17 @@
 
             hideFileInput: true,
 
-            uploadIframe: ".uploadIframe"
+            uploadIframe: ".uploadIframe",
+
+            hover: true,
+
+            addClass: "jQuery-image-upload"
         }, options);
 
         // selected jQuery objects
         var $self = this;
+
+        $self.addClass(settings.addClass);
 
         // form action not provided
         if (!settings.formAction) {
@@ -49,7 +55,9 @@
         }
 
         // wrap
-        $self.wrap(settings.wrapContent)
+        if (!settings.hover) {
+            $self.wrap(settings.wrapContent)
+        }
 
         // create the controls div
         var $controls       = $("<div>").addClass("controls")
@@ -68,7 +76,7 @@
                                 .addClass(settings.browseButtonClass)
                                 .attr("value", settings.browseButtonValue)
                                 .on("click", function () { $fileInput.click(); })
-            
+
           , $uploadIframe   = $("<iframe>")
                                 .attr("id", "uploadIframe-" + Math.random().toString(36).substring(5, 20).toUpperCase())
                                 .hide()
@@ -95,9 +103,6 @@
 
         // append $form to $controls
         $controls.append($uploadForm);
-
-        // append controls to image wrapper
-        $self.parent().append($controls);
 
         // form on submit
         $uploadForm.on("submit", function () {
@@ -138,7 +143,39 @@
                 // replace the file input
                 $fileInput.replaceWith($fileInput.clone(true));
             });
-
         });
+
+        // append controls to image wrapper
+        if (!settings.hover) {
+            $self.parent().append($controls);
+        } else {
+
+            var offset = $self.offset();
+            $controls.css({
+                position: "absolute",
+                top: offset.top,
+                left: offset.left
+            }).addClass("jQuery-image-upload-controls");
+
+            $self.data("controls", $controls);
+            $("body").append($controls.hide());
+
+            $self.on("mouseenter", function () {
+                var $thisImg = $(this)
+                $controls.show();
+            });
+
+            $('body').on("mouseleave", "." + settings.addClass, function (e) {
+
+                var o = $self.position()
+                  , w = $self.width()
+                  , h = $self.height();
+
+                if ((e.pageX < o.left || e.pageX > o.left + w) ||
+                    (e.pageY < o.top || e.pageY > o.top + h)) {
+                    $controls.hide();
+                }
+            });
+        }
     };
 })($);
