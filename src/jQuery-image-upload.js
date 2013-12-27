@@ -47,6 +47,14 @@
         // selected jQuery objects
         var $self = this;
 
+        // call image upload for each element
+        if ($self.length > 1) {
+            $self.each(function () {
+                $(this).imageUpload(settings);
+            });
+            return;
+        }
+
         $self.addClass(settings.addClass);
 
         // form action not provided
