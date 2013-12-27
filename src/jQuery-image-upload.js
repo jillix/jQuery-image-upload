@@ -188,7 +188,7 @@
             $("body").on("mouseleave", "." + settings.addClass, function (e) {
 
                 // get position
-                var o = $self.position()
+                var o = $self.offset()
 
                     // width
                   , w = $self.width()
