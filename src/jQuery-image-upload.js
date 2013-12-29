@@ -47,6 +47,9 @@
         // selected jQuery objects
         var $self = this;
 
+        // return if no elements
+        if (!$self.length) { return $self; }
+
         // call image upload for each element
         if ($self.length > 1) {
             $self.each(function () {
