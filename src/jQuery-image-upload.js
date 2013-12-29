@@ -163,22 +163,26 @@
             $self.parent().append($controls);
         } else {
 
-            // get the self offset
-            var offset = $self.offset();
-
             // set absolute position to controls and set the offset
-            $controls.css({
-                position: "absolute",
-                top: offset.top,
-                left: offset.left
+            $controls.css({ position: "absolute" });
+
             // add class to controls
-            }).addClass("jQuery-image-upload-controls");
+            $controls.addClass("jQuery-image-upload-controls");
 
             // append controls to body
             $("body").append($controls.hide());
 
             // self on mouse enter
             $self.on("mouseenter", function () {
+
+                // get the self offset
+                var offset = $self.offset();
+
+                // set control possition
+                $controls.css({
+                    top: offset.top,
+                    left: offset.left
+                });
 
                 // show controls
                 $controls.show();
