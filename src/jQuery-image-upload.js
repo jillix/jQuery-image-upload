@@ -60,9 +60,11 @@
             return $self;
         }
 
-        // don't create the image upload if it was already created
-        // for this element
-        if ($self.data("imageUpload")) { return $self; }
+        // reload imageUpload if it was already created
+        if ($self.data("imageUpload")) {
+            $self.trigger("imageUpload.reload");
+            return $self;
+        }
 
         // add class
         $self.addClass(settings.addClass);
