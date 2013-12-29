@@ -215,6 +215,11 @@
             });
         }
 
+        // destroy
+        $self.on("imageUpload.destroy", function () {
+            $controls.remove();
+        });
+
         // return selected element
         return $self;
     };
