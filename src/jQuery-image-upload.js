@@ -137,6 +137,10 @@
                 // if no result, return
                 if (!result) { return; }
 
+                // recreate the image upload controls
+                $self.trigger("imageUpload.destroy");
+                $self.imageUpload(options);
+
                 // verify file input value
                 if (!$fileInput.val()) {
                     return;
