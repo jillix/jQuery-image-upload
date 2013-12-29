@@ -87,7 +87,10 @@
           , $browseButton   = $("<button>")
                                 .addClass(settings.browseButtonClass)
                                 .html(settings.browseButtonValue)
-                                .on("click", function () { $fileInput.click(); })
+                                .on("click", function () {
+                                    $fileInput.click();
+                                    return false;
+                                })
 
           , $uploadIframe   = $("<iframe>")
                                 .attr("id", "uploadIframe-" + Math.random().toString(36).substring(5, 20).toUpperCase())
