@@ -137,10 +137,9 @@
                 // if no result, return
                 if (!result) { return; }
 
-                // recreate the image upload controls only if the file input is hidden
+                // reload the image upload controls only if the file input is hidden
                 if (settings.hideFileInput) {
-                    $self.trigger("imageUpload.destroy");
-                    $self.imageUpload(options);
+                    $self.trigger("imageUpload.reload");
                 }
 
                 // verify file input value
@@ -224,6 +223,12 @@
         // destroy
         $self.on("imageUpload.destroy", function () {
             $controls.remove();
+        });
+
+        // reload
+        $self.on("imageUpload.reload", function () {
+            $self.trigger("imageUpload.destroy");
+            $self.imageUpload(options);
         });
 
         // return selected element
