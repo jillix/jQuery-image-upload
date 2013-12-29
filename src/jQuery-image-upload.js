@@ -49,9 +49,6 @@
         // selected jQuery objects
         var $self = this;
 
-        // set imageUpload data
-        $self.data("imageUpload", options);
-
         // return if no elements
         if (!$self.length) { return $self; }
 
@@ -63,7 +60,11 @@
             return $self;
         }
 
+        // add class
         $self.addClass(settings.addClass);
+
+        // set imageUpload data
+        $self.data("imageUpload", options);
 
         // form action not provided
         if (!settings.formAction) {
