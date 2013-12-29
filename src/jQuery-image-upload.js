@@ -49,6 +49,9 @@
         // selected jQuery objects
         var $self = this;
 
+        // set imageUpload data
+        $self.data("imageUpload", options);
+
         // return if no elements
         if (!$self.length) { return $self; }
 
@@ -229,6 +232,9 @@
             // remove events
             $self.off("imageUpload.destroy");
             $self.off("imageUpload.reload");
+
+            // remove data
+            $self.data("imageUpload", null);
         });
 
         // reload
