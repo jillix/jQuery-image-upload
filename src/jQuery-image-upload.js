@@ -138,7 +138,7 @@
                 if (!result) { return; }
 
                 // recreate the image upload controls only if the file input is hidden
-                if (hideFileInput) {
+                if (settings.hideFileInput) {
                     $self.trigger("imageUpload.destroy");
                     $self.imageUpload(options);
                 }
