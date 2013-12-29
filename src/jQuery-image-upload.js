@@ -77,15 +77,14 @@
                                 .addClass(settings.inputFileClass)
                                 .attr("name", settings.inputFileName)
 
-          , $uploadButton   = $("<input>")
+          , $uploadButton   = $("<button>")
                                 .attr("type", "submit")
-                                .addClass()
-                                .attr("value", settings.uploadButtonValue)
+                                .addClass(settings.uploadButtonClass)
+                                .html(settings.uploadButtonValue)
 
-          , $browseButton   = $("<input>")
-                                .attr("type", "button")
+          , $browseButton   = $("<button>")
                                 .addClass(settings.browseButtonClass)
-                                .attr("value", settings.browseButtonValue)
+                                .html(settings.browseButtonValue)
                                 .on("click", function () { $fileInput.click(); })
 
           , $uploadIframe   = $("<iframe>")
