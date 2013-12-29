@@ -14,14 +14,8 @@
  * */
 (function ($) {
 
-   /*
-    * $("[jQuery selector]").imageUpload({...});
-    * */
-    $.fn.imageUpload = function(options) {
-
-        // defaults
-        var settings = $.extend( {
-
+    // defaults
+    var defaults = {
             wrapContent: "<div class='jQuery-imageUpload'>",
 
             inputFileName: "inputFile",
@@ -42,7 +36,15 @@
             hover: true,
 
             addClass: "jQuery-image-upload"
-        }, options);
+    };
+
+   /*
+    * $("[jQuery selector]").imageUpload({...});
+    * */
+    $.fn.imageUpload = function(options) {
+
+        // defaults
+        var settings = $.extend(defaults, options);
 
         // selected jQuery objects
         var $self = this;
@@ -213,4 +215,8 @@
         // return selected element
         return $self;
     };
+
+    // defaults
+    $.imageUpload = $.fn.imageUpload;
+    $.imageUpload.defaults = defaults;
 })($);
