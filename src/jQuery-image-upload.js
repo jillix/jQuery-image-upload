@@ -222,7 +222,13 @@
 
         // destroy
         $self.on("imageUpload.destroy", function () {
+
+            // remove controls
             $controls.remove();
+
+            // remove events
+            $self.off("imageUpload.destroy");
+            $self.off("imageUpload.reload");
         });
 
         // reload
