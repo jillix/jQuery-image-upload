@@ -60,6 +60,10 @@
             return $self;
         }
 
+        // don't create the image upload if it was already created
+        // for this element
+        if ($self.data("imageUpload")) { return $self; }
+
         // add class
         $self.addClass(settings.addClass);
 
