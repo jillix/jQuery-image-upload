@@ -124,11 +124,11 @@
                                     // destroy the image upload
                                     $self.trigger("imageUpload.destroy");
 
-                                    // and remove the image from dom
-                                    $self.remove();
-
                                     // trigger remove event
                                     $self.trigger("imageUpload.imageRemoved");
+
+                                    // and remove the image from dom
+                                    $self.remove();
 
                                     // prevent browser's default behavior
                                     return false;
