@@ -27,9 +27,13 @@
             browseButtonClass: "browseButton",
             browseButtonValue: "Browse",
 
+            deleteButtonValue: "Delete image",
+            deleteButtonClass: "deleteButton",
+
             formClass: "controlForm",
 
             hideFileInput: true,
+            hideDeleteButton: false,
 
             uploadIframe: ".uploadIframe",
 
@@ -102,7 +106,26 @@
                                 .addClass(settings.browseButtonClass)
                                 .html(settings.browseButtonValue)
                                 .on("click", function () {
+
+                                    // click the file input
                                     $fileInput.click();
+
+                                    // prevent browser's default behavior
+                                    return false;
+                                })
+
+            // create the delete button
+          , $deleteButton   = $("<button>")
+                                .addClass(settings.deleteButtonClass)
+                                .html(settings.deleteButtonValue)
+                                .on("click", function () {
+                                    // destroy the image upload
+                                    $self.trigger("imageUpload.destroy");
+
+                                    // and remove the image from dom
+                                    $self.remove();
+
+                                    // prevent browser's default behavior
                                     return false;
                                 })
 
@@ -122,7 +145,14 @@
 
 
         // append controls to form
-        $uploadForm.append([$browseButton, $fileInput, $uploadButton, $uploadIframe]);
+        $uploadForm.append([$browseButton, $fileInput, $uploadButton, $deleteButton, $uploadIframe]);
+
+        // hide delete button
+        if (settings.hideDeleteButton) {
+
+            // we just remove it
+            $deleteButton.remove();
+        }
 
         // hide file input
         if (settings.hideFileInput) {
