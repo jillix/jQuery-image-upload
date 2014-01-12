@@ -229,7 +229,7 @@
                 $self.attr("src", result);
 
                 // trigger image changed event
-                $self.trigger("imageChanged");
+                $self.trigger("imageUpload.imageChanged");
 
                 // replace the file input
                 $fileInput.replaceWith($fileInput.clone(true));
