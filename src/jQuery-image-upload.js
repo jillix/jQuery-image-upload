@@ -127,6 +127,9 @@
                                     // and remove the image from dom
                                     $self.remove();
 
+                                    // trigger remove event
+                                    $self.trigger("imageUpload.imageRemoved");
+
                                     // prevent browser's default behavior
                                     return false;
                                 })
