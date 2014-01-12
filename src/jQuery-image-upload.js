@@ -24,8 +24,8 @@
             uploadButtonValue: "Upload",
             uploadButtonClass: "uploadButton",
 
-            browseButtonClass: "browseButton",
             browseButtonValue: "Browse",
+            browseButtonClass: "browseButton",
 
             deleteButtonValue: "Delete image",
             deleteButtonClass: "deleteButton",
