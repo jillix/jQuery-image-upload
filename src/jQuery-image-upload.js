@@ -30,6 +30,8 @@
             deleteButtonValue: "Delete image",
             deleteButtonClass: "deleteButton",
 
+            automaticUpload: false,
+
             formClass: "controlForm",
 
             hideFileInput: true,
@@ -152,6 +154,23 @@
 
             // we just remove it
             $deleteButton.remove();
+        }
+
+        // if automatic upload
+        if (settings.automaticUpload) {
+
+            // hide the upload button
+            $uploadButton.hide();
+
+            // file input change
+            $fileInput.on("change", function () {
+
+                // no file selected, do nothing
+                if (!$(this).val()) { return; }
+
+                // start upload
+                $uploadButton.click();
+            });
         }
 
         // hide file input
