@@ -82,18 +82,22 @@
             $self.wrap(settings.wrapContent)
         }
 
-        // create the controls div
+        // create the control div
         var $controls       = $("<div>").addClass("controls")
+
+            // create the file input element
           , $fileInput      = $("<input>")
                                 .attr("type", "file")
                                 .addClass(settings.inputFileClass)
                                 .attr("name", settings.inputFileName)
 
+            // create the upload button
           , $uploadButton   = $("<button>")
                                 .attr("type", "submit")
                                 .addClass(settings.uploadButtonClass)
                                 .html(settings.uploadButtonValue)
 
+            // create the browse button
           , $browseButton   = $("<button>")
                                 .addClass(settings.browseButtonClass)
                                 .html(settings.browseButtonValue)
@@ -102,11 +106,13 @@
                                     return false;
                                 })
 
+            // create the upload iframe
           , $uploadIframe   = $("<iframe>")
                                 .attr("id", "uploadIframe-" + Math.random().toString(36).substring(5, 20).toUpperCase())
                                 .hide()
 
 
+            // create the upload form
           , $uploadForm     = $("<form>")
                                 .addClass(settings.formClass)
                                 .attr("target", $uploadIframe.attr("id"))
