@@ -134,9 +134,13 @@
                                     return false;
                                 })
 
+            // generate the iframe id
+          , iframeId =  "uploadIframe-" + Math.random().toString(36).substring(5, 20).toLowerCase()
+
             // create the upload iframe
           , $uploadIframe   = $("<iframe>")
-                                .attr("id", "uploadIframe-" + Math.random().toString(36).substring(5, 20).toUpperCase())
+                                .attr("id", iframeId)
+                                .attr("name", iframeId)
                                 .hide()
 
 
