@@ -37,8 +37,6 @@
             hideFileInput: true,
             hideDeleteButton: false,
 
-            uploadIframe: ".uploadIframe",
-
             hover: true,
 
             addClass: "jQuery-image-upload"
