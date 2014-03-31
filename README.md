@@ -30,6 +30,13 @@ $(".image").imageUpload({
     </thead>
     <tbody>
         <tr>
+            <td><code>formAction</code></td>
+            <td>The url that will compute the form data and upload the image on the server. This must respond with a string that represents the new image source.</td>
+            <td>String</td>
+            <td>Any string</td>
+            <td>No default value, but required field</td>
+        </tr>
+        <tr>
             <td><code>wrapContent</code></td>
             <td>The element that must wrap the selected elements. Used only when <code>hover</code> is <code>false</code></td>
             <td>String</td>
