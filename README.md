@@ -41,7 +41,7 @@ $(".image").imageUpload({
             <td>The element that must wrap the selected elements. Used only when <code>hover</code> is <code>false</code></td>
             <td>String</td>
             <td>HTML String or jQuery object</td>
-            <td><code>"<div class='jQuery-imageUpload'>"</code></td>
+            <td><code>"&lt;div class='jQuery-imageUpload'&gt;"</code></td>
         </tr>
         <tr>
             <td><code>inputFileName</code></td>
