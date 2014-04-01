@@ -179,6 +179,10 @@ The plugin emits the following events:
 
 ## Changelog
 
+### v0.2.2
+ - Compatibilty with Firefox (see [this bug](https://github.com/jillix/jQuery-image-upload/issues/6))
+ - Documentation ([issue](https://github.com/jillix/jQuery-image-upload/issues/9))
+
 ### v0.2.1
  - Fixes, comments
  - Trigger `imageChanged` event when the image source was changed
