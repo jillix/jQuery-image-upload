@@ -91,9 +91,11 @@
 
         // create the file input element
         var $fileInput = $("<input>")
-                            .attr("type", "file")
+                            .attr({
+                                "type": "file",
+                                "name": settings.inputFileName
+                            })
                             .addClass(settings.inputFileClass)
-                            .attr("name", settings.inputFileName);
 
         // create the upload button
         var $uploadButton = $("<button>")
@@ -141,18 +143,22 @@
 
         // create the upload iframe
         var $uploadIframe   = $("<iframe>")
-                                .attr("id", iframeId)
-                                .attr("name", iframeId)
+                                .attr({
+                                    "id": iframeId,
+                                    "name": iframeId
+                                })
                                 .hide();
 
 
         // create the upload form
         var $uploadForm     = $("<form>")
                                 .addClass(settings.formClass)
-                                .attr("target", $uploadIframe.attr("id"))
-                                .attr("enctype", "multipart/form-data")
-                                .attr("method", "post")
-                                .attr("action", settings.formAction);
+                                .attr({
+                                    "target": $uploadIframe.attr("id"),
+                                    "enctype": "multipart/form-data",
+                                    "method": "post",
+                                    "action": settings.formAction
+                                });
 
 
         // append controls to form
