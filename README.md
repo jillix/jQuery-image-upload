@@ -141,6 +141,13 @@ $(".image").imageUpload({
             <td>Any string</td>
             <td>jQuery-image-upload</td>
         </tr>
+        <tr>
+            <td><code>waiter</code></td>
+            <td>Path to the gif image that should be used as waiter.</td>
+            <td>String</td>
+            <td>Path</td>
+            <td></td>
+        </tr>
     </tbody>
 </table>
 
