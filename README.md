@@ -186,6 +186,11 @@ The plugin emits the following events:
 
 ## Changelog
 
+### v0.2.3
+ - Added support for waiter images
+ - Optimized `attr` jQuery calls
+ - Added minified version
+
 ### v0.2.2
  - Compatibilty with Firefox (see [this bug](https://github.com/jillix/jQuery-image-upload/issues/6))
  - Documentation ([issue](https://github.com/jillix/jQuery-image-upload/issues/9))
