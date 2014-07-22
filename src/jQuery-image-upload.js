@@ -1,5 +1,5 @@
 /*
- *  jQuery prioritize events
+ *  jQuery Image Upload
  *
  *  A jQuery plugin that adds controls to the selected jQuery
  *  elements with a simple call.
@@ -16,30 +16,30 @@
 
     // defaults
     var defaults = {
-            wrapContent: "<div class='jQuery-imageUpload'>",
+        wrapContent: "<div class='jQuery-imageUpload'>",
 
-            inputFileName: "inputFile",
-            inputFileClass: "inputFile",
+        inputFileName: "inputFile",
+        inputFileClass: "inputFile",
 
-            uploadButtonValue: "Upload",
-            uploadButtonClass: "uploadButton",
+        uploadButtonValue: "Upload",
+        uploadButtonClass: "uploadButton",
 
-            browseButtonValue: "Browse",
-            browseButtonClass: "browseButton",
+        browseButtonValue: "Browse",
+        browseButtonClass: "browseButton",
 
-            deleteButtonValue: "Delete image",
-            deleteButtonClass: "deleteButton",
+        deleteButtonValue: "Delete image",
+        deleteButtonClass: "deleteButton",
 
-            automaticUpload: false,
+        automaticUpload: false,
 
-            formClass: "controlForm",
+        formClass: "controlForm",
 
-            hideFileInput: true,
-            hideDeleteButton: false,
+        hideFileInput: true,
+        hideDeleteButton: false,
 
-            hover: true,
+        hover: true,
 
-            addClass: "jQuery-image-upload"
+        addClass: "jQuery-image-upload"
     };
 
    /*
@@ -87,22 +87,22 @@
         }
 
         // create the control div
-        var $controls       = $("<div>").addClass("controls")
+        var $controls = $("<div>").addClass("controls");
 
-            // create the file input element
-          , $fileInput      = $("<input>")
-                                .attr("type", "file")
-                                .addClass(settings.inputFileClass)
-                                .attr("name", settings.inputFileName)
+        // create the file input element
+        var $fileInput = $("<input>")
+                            .attr("type", "file")
+                            .addClass(settings.inputFileClass)
+                            .attr("name", settings.inputFileName);
 
-            // create the upload button
-          , $uploadButton   = $("<button>")
+        // create the upload button
+        var $uploadButton = $("<button>")
                                 .attr("type", "submit")
                                 .addClass(settings.uploadButtonClass)
-                                .html(settings.uploadButtonValue)
+                                .html(settings.uploadButtonValue);
 
-            // create the browse button
-          , $browseButton   = $("<button>")
+        // create the browse button
+        var $browseButton = $("<button>")
                                 .addClass(settings.browseButtonClass)
                                 .html(settings.browseButtonValue)
                                 .on("click", function () {
@@ -112,10 +112,10 @@
 
                                     // prevent browser's default behavior
                                     return false;
-                                })
+                                });
 
-            // create the delete button
-          , $deleteButton   = $("<button>")
+        // create the delete button
+        var $deleteButton = $("<button>")
                                 .addClass(settings.deleteButtonClass)
                                 .html(settings.deleteButtonValue)
                                 .on("click", function () {
@@ -130,20 +130,24 @@
 
                                     // prevent browser's default behavior
                                     return false;
-                                })
+                                });
 
-            // generate the iframe id
-          , iframeId =  "uploadIframe-" + Math.random().toString(36).substring(5, 20).toLowerCase()
+        // generate the iframe id
+        var iframeId =  "uploadIframe-" + Math
+                                            .random()
+                                            .toString(36)
+                                            .substring(5, 20)
+                                            .toLowerCase();
 
-            // create the upload iframe
-          , $uploadIframe   = $("<iframe>")
+        // create the upload iframe
+        var $uploadIframe   = $("<iframe>")
                                 .attr("id", iframeId)
                                 .attr("name", iframeId)
-                                .hide()
+                                .hide();
 
 
-            // create the upload form
-          , $uploadForm     = $("<form>")
+        // create the upload form
+        var $uploadForm     = $("<form>")
                                 .addClass(settings.formClass)
                                 .attr("target", $uploadIframe.attr("id"))
                                 .attr("enctype", "multipart/form-data")
@@ -296,14 +300,10 @@
             // on mouse leave
             $("body").on("mouseleave", "." + settings.addClass, function (e) {
 
-                // get position
-                var o = $self.offset()
-
-                    // width
-                  , w = $self.width()
-
-                    // and the hegiht
-                  , h = $self.height();
+                // get position, width and height
+                var o = $self.offset();
+                var w = $self.width();
+                var h = $self.height();
 
                 // hide controls
                 if ((e.pageX < o.left || e.pageX > o.left + w) ||
