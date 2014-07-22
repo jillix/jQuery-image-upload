@@ -198,11 +198,25 @@
             // unset the load handler
             $uploadIframe.off("load");
 
+            // Waiter image
+            if (typeof settings.waiter === "string") {
+                $self.attr("src", settings.waiter);
+            }
+
+            $self.addClass("loading");
+            $controls.hide();
+
             // set it again
             $uploadIframe.on("load", function () {
 
                 // get text from the page
                 var result = $(this.contentWindow.document).text();
+
+                // Removed loading class
+                if (!result || !$fileInput.val()) {
+                    console.log("removing");
+                    $self.removeClass("loading");
+                }
 
                 // if no result, return
                 if (!result) { return; }
@@ -229,9 +243,14 @@
 
                 // upadte the image source
                 $self.attr("src", result);
-
-                // trigger image changed event
-                $self.trigger("imageUpload.imageChanged");
+                $self.fadeOut(function () {
+                    imgLoad($self, function () {
+                        $self.removeClass("loading");
+                        $self.fadeIn();
+                        // trigger image changed event
+                        $self.trigger("imageUpload.imageChanged");
+                    });
+                });
 
                 // replace the file input
                 $fileInput.replaceWith($fileInput.clone(true));
@@ -256,6 +275,10 @@
 
             // self on mouse enter
             $self.on("mouseenter", function () {
+
+                if ($self.hasClass("loading")) {
+                    return;
+                }
 
                 // get the self offset
                 var offset = $self.offset();
@@ -312,6 +335,24 @@
 
         // return selected element
         return $self;
+    }
+
+    /**
+     * Trigger a callback when the selected images are loaded:
+     * @param {String} selector
+     * @param {Function} callback
+     */
+    function imgLoad(selector, callback){
+        $(selector).each(function(){
+            if (this.complete || /*for IE 10-*/ $(this).height() > 0) {
+                callback.apply(this);
+            }
+            else {
+                $(this).on('load', function(){
+                    callback.apply(this);
+                });
+            }
+        });
     };
 
     // defaults
