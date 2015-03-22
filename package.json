@@ -1,5 +1,5 @@
 {
-  "name": "jQuery-image-upload",
+  "name": "jquery-image-upload",
   "version": "1.0.0",
   "description": "A jQuery plugin that adds controls to the selected jQuery elements with a simple call.",
   "main": "src/jQuery-image-upload.js",
