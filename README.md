@@ -1,6 +1,4 @@
-jQuery-image-upload
-===================
-
+# jQuery Image Upload
 A jQuery plugin that adds controls to the selected jQuery elements with a simple call.
 
 ## Example
@@ -184,26 +182,17 @@ The plugin emits the following events:
 </table>
 
 
-## Changelog
 
-### v0.2.3
- - Added support for waiter images
- - Optimized `attr` jQuery calls
- - Added minified version
+## How to contribute
 
-### v0.2.2
- - Compatibilty with Firefox (see [this bug](https://github.com/jillix/jQuery-image-upload/issues/6))
- - Documentation ([issue](https://github.com/jillix/jQuery-image-upload/issues/9))
-
-### v0.2.1
- - Fixes, comments
- - Trigger `imageChanged` event when the image source was changed
-
-### v0.2.0
- - Show controls only on `hover`.
-
-### v0.1.0
- - Initial release
+1. File an issue in the repository, using the bug tracker, describing the
+   contribution you'd like to make. This will help us to get you started on the
+   right foot.
+2. Fork the project in your account and create a new branch:
+   `your-great-feature`.
+3. Commit your changes in that branch.
+4. Open a pull request, and reference the initial issue in the pull request
+   message.
 
 ## License
-See LICENSE file.
+See the [LICENSE](./LICENSE) file.
