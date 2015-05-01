@@ -45,16 +45,16 @@
    /*
     * $("[jQuery selector]").imageUpload({...});
     * */
-    $.fn.imageUpload = function(options) {
-
-        // defaults
-        var settings = $.extend(defaults, options);
+    $.fn.imageUpload = function (options) {
 
         // selected jQuery objects
         var $self = this;
 
         // return if no elements
         if (!$self.length) { return $self; }
+
+        // defaults
+        var settings = $.extend(defaults, options);
 
         // call image upload for each element
         if ($self.length > 1) {
@@ -208,6 +208,9 @@
             // unset the load handler
             $uploadIframe.off("load");
 
+            // save the old image source in case of error
+            var oldSrc = $self.attr("src");
+
             // Waiter image
             if (typeof settings.waiter === "string") {
                 $self.attr("src", settings.waiter);
@@ -222,14 +225,19 @@
                 // get text from the page
                 var result = $(this.contentWindow.document).text();
 
-                // Removed loading class
-                if (!result || !$fileInput.val()) {
-                    console.log("removing");
-                    $self.removeClass("loading");
+                // the selected file was not a valid image and `result` is not a URL
+                if (!/^https?|^\//.test(result)) {
+                    loadImage($self, oldSrc);
+                    $self.trigger("imageUpload.uploadFailed");
+                    return;
                 }
 
                 // if no result, return
-                if (!result) { return; }
+                if (!result) {
+                    loadImage($self, oldSrc);
+                    $self.trigger("imageUpload.uploadFailed");
+                    return;
+                }
 
                 // reload the image upload controls only if the file input is hidden
                 if (settings.hideFileInput) {
@@ -238,6 +246,7 @@
 
                 // verify file input value
                 if (!$fileInput.val()) {
+                    loadImage($self, oldSrc);
                     return;
                 }
 
@@ -251,15 +260,10 @@
                 // set src of iframe
                 $uploadIframe.attr("src", "");
 
-                // upadte the image source
-                $self.attr("src", result);
-                $self.fadeOut(function () {
-                    imgLoad($self, function () {
-                        $self.removeClass("loading");
-                        $self.fadeIn();
-                        // trigger image changed event
-                        $self.trigger("imageUpload.imageChanged");
-                    });
+                // update the image source
+                loadImage($self, result, function () {
+                    // trigger image changed event
+                    $self.trigger("imageUpload.imageChanged");
                 });
 
                 // replace the file input
@@ -344,17 +348,37 @@
     }
 
     /**
+     * Load the image at the URL `newSource` in the `$imageElement` jQuery
+     * element with a fade in/out animation, then call the `callback`.
+     * @param {jQuery} $imageElement
+     * @param {String} newSource
+     * @param {Function} callback
+     */
+    function loadImage ($imageElement, newSource, callback) {
+        $imageElement.fadeOut(function () {
+            $imageElement.attr("src", newSource);
+            imgLoad($imageElement, function () {
+                $imageElement.removeClass("loading");
+                $imageElement.fadeIn();
+                if (typeof callback === "function") {
+                    callback();
+                }
+            });
+        });
+    }
+
+    /**
      * Trigger a callback when the selected images are loaded:
      * @param {String} selector
      * @param {Function} callback
      */
-    function imgLoad(selector, callback){
-        $(selector).each(function(){
+    function imgLoad (selector, callback) {
+        $(selector).each(function () {
             if (this.complete || /*for IE 10-*/ $(this).height() > 0) {
                 callback.apply(this);
             }
             else {
-                $(this).on('load', function(){
+                $(this).on('load', function () {
                     callback.apply(this);
                 });
             }
