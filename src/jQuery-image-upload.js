@@ -367,7 +367,7 @@
      */
     function imgLoad (selector, callback) {
         $(selector).each(function () {
-            if (this.complete || /*for IE 10-*/ $(this).height() > 0) {
+            if (this.complete) {
                 callback.apply(this);
             }
             else {
