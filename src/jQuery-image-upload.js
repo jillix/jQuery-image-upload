@@ -250,13 +250,6 @@
                     return;
                 }
 
-                // try to parse result
-                try {
-                    result = JSON.parse(result);
-                } catch (e) {
-                    // nothing to do
-                }
-
                 // set src of iframe
                 $uploadIframe.attr("src", "");
 
