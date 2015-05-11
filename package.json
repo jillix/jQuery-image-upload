@@ -3,12 +3,6 @@
   "version": "1.1.0",
   "description": "A jQuery plugin that adds controls to the selected jQuery elements with a simple call.",
   "main": "src/jQuery-image-upload.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/jillix/jQuery-image-upload.git"
@@ -19,9 +13,19 @@
     "jQuery"
   ],
   "author": "jillix <contact@jillix.com>",
+  "contributors": [
+      "Ionică Bizău <bizauionica@gmail.com> (http://ionicabizau.net)",
+      "Silviu Bogan <silviubogan@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jillix/jQuery-image-upload/issues"
   },
-  "homepage": "https://github.com/jillix/jQuery-image-upload"
+  "homepage": "https://github.com/jillix/jQuery-image-upload",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
