@@ -82,7 +82,7 @@
 
         // Wrap
         if (!settings.hover) {
-            $self.wrap(settings.wrapContent)
+            $self.wrap(settings.wrapContent);
         }
 
         // Create the control div
@@ -94,7 +94,7 @@
                                 "type": "file",
                                 "name": settings.inputFileName
                             })
-                            .addClass(settings.inputFileClass)
+                            .addClass(settings.inputFileClass);
 
         // Create the upload button
         var $uploadButton = $("<button>")
@@ -337,7 +337,7 @@
 
         // Return selected element
         return $self;
-    }
+    };
 
     /**
      * Load the image at the URL `newSource` in the `$imageElement` jQuery
@@ -375,7 +375,7 @@
                 });
             }
         });
-    };
+    }
 
     // Defaults
     $.imageUpload = $.fn.imageUpload;
