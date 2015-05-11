@@ -13,7 +13,7 @@
  * */
 (function ($) {
 
-    // defaults
+    // Defaults
     var defaults = {
         wrapContent: "<div class='jQuery-imageUpload'>",
 
@@ -46,16 +46,16 @@
     * */
     $.fn.imageUpload = function (options) {
 
-        // selected jQuery objects
+        // Selected jQuery objects
         var $self = this;
 
-        // return if no elements
+        // Return if no elements
         if (!$self.length) { return $self; }
 
-        // defaults
+        // Defaults
         var settings = $.extend(defaults, options);
 
-        // call image upload for each element
+        // Call image upload for each element
         if ($self.length > 1) {
             $self.each(function () {
                 $(this).imageUpload(settings);
@@ -63,32 +63,32 @@
             return $self;
         }
 
-        // reload imageUpload if it was already created
+        // Reload imageUpload if it was already created
         if ($self.data("imageUpload")) {
             $self.trigger("imageUpload.reload");
             return $self;
         }
 
-        // add class
+        // Add class
         $self.addClass(settings.addClass);
 
-        // set imageUpload data
+        // Set imageUpload data
         $self.data("imageUpload", options);
 
-        // form action not provided
+        // Form action not provided
         if (!settings.formAction) {
             throw new Error ("Form action was not provided. Please provide it: $(...).imageUpload({formAction: '...'})");
         }
 
-        // wrap
+        // Wrap
         if (!settings.hover) {
             $self.wrap(settings.wrapContent)
         }
 
-        // create the control div
+        // Create the control div
         var $controls = $("<div>").addClass("controls");
 
-        // create the file input element
+        // Create the file input element
         var $fileInput = $("<input>")
                             .attr({
                                 "type": "file",
@@ -96,51 +96,51 @@
                             })
                             .addClass(settings.inputFileClass)
 
-        // create the upload button
+        // Create the upload button
         var $uploadButton = $("<button>")
                                 .attr("type", "submit")
                                 .addClass(settings.uploadButtonClass)
                                 .html(settings.uploadButtonValue);
 
-        // create the browse button
+        // Create the browse button
         var $browseButton = $("<button>")
                                 .addClass(settings.browseButtonClass)
                                 .html(settings.browseButtonValue)
                                 .on("click", function () {
 
-                                    // click the file input
+                                    // Click the file input
                                     $fileInput.click();
 
-                                    // prevent browser's default behavior
+                                    // Prevent browser's default behavior
                                     return false;
                                 });
 
-        // create the delete button
+        // Create the delete button
         var $deleteButton = $("<button>")
                                 .addClass(settings.deleteButtonClass)
                                 .html(settings.deleteButtonValue)
                                 .on("click", function () {
-                                    // destroy the image upload
+                                    // Destroy the image upload
                                     $self.trigger("imageUpload.destroy");
 
-                                    // trigger remove event
+                                    // Trigger remove event
                                     $self.trigger("imageUpload.imageRemoved");
 
-                                    // and remove the image from dom
+                                    // And remove the image from dom
                                     $self.remove();
 
-                                    // prevent browser's default behavior
+                                    // Prevent browser's default behavior
                                     return false;
                                 });
 
-        // generate the iframe id
+        // Generate the iframe id
         var iframeId =  "uploadIframe-" + Math
                                             .random()
                                             .toString(36)
                                             .substring(5, 20)
                                             .toLowerCase();
 
-        // create the upload iframe
+        // Create the upload iframe
         var $uploadIframe   = $("<iframe>")
                                 .attr({
                                     "id": iframeId,
@@ -149,7 +149,7 @@
                                 .hide();
 
 
-        // create the upload form
+        // Create the upload form
         var $uploadForm     = $("<form>")
                                 .addClass(settings.formClass)
                                 .attr({
@@ -160,54 +160,54 @@
                                 });
 
 
-        // append controls to form
+        // Append controls to form
         $uploadForm.append([$browseButton, $fileInput, $uploadButton, $deleteButton, $uploadIframe]);
 
-        // hide delete button
+        // Hide delete button
         if (settings.hideDeleteButton) {
 
-            // we just remove it
+            // We just remove it
             $deleteButton.remove();
         }
 
-        // if automatic upload
+        // If automatic upload
         if (settings.automaticUpload) {
 
-            // hide the upload button
+            // Hide the upload button
             $uploadButton.hide();
 
-            // file input change
+            // File input change
             $fileInput.on("change", function () {
 
-                // no file selected, do nothing
+                // No file selected, do nothing
                 if (!$(this).val()) { return; }
 
-                // start upload
+                // Start upload
                 $uploadButton.click();
             });
         }
 
-        // hide file input
+        // Hide file input
         if (settings.hideFileInput) {
             $fileInput.hide();
         } else {
-            // hide browse button
+            // Hide browse button
             $browseButton.hide();
         }
 
-        // append $form to $controls
+        // Append $form to $controls
         $controls.append($uploadForm);
 
-        // form on submit
+        // Form on submit
         $uploadForm.on("submit", function () {
 
-            // get submiited form
+            // Get submiited form
             var $form = $(this);
 
-            // unset the load handler
+            // Unset the load handler
             $uploadIframe.off("load");
 
-            // save the old image source in case of error
+            // Save the old image source in case of error
             var oldSrc = $self.attr("src");
 
             // Waiter image
@@ -218,96 +218,96 @@
             $self.addClass("loading");
             $controls.hide();
 
-            // set it again
+            // Set it again
             $uploadIframe.on("load", function () {
 
-                // get text from the page
+                // Get text from the page
                 var result = $(this.contentWindow.document).text();
 
-                // the selected file was not a valid image and `result` is not a URL
+                // The selected file was not a valid image and `result` is not a URL
                 if (!/^https?|^\//.test(result)) {
                     loadImage($self, oldSrc);
                     $self.trigger("imageUpload.uploadFailed");
                     return;
                 }
 
-                // if no result, return
+                // If no result, return
                 if (!result) {
                     loadImage($self, oldSrc);
                     $self.trigger("imageUpload.uploadFailed");
                     return;
                 }
 
-                // reload the image upload controls only if the file input is hidden
+                // Reload the image upload controls only if the file input is hidden
                 if (settings.hideFileInput) {
                     $self.trigger("imageUpload.reload");
                 }
 
-                // verify file input value
+                // Verify file input value
                 if (!$fileInput.val()) {
                     loadImage($self, oldSrc);
                     return;
                 }
 
-                // set src of iframe
+                // Set src of iframe
                 $uploadIframe.attr("src", "");
 
-                // update the image source
+                // Update the image source
                 loadImage($self, result, function () {
-                    // trigger image changed event
+                    // Trigger image changed event
                     $self.trigger("imageUpload.imageChanged");
                 });
 
-                // replace the file input
+                // Replace the file input
                 $fileInput.replaceWith($fileInput.clone(true));
             });
         });
 
-        // no hover
+        // No hover
         if (!settings.hover) {
 
-            // append controls to image wrapper
+            // Append controls to image wrapper
             $self.parent().append($controls);
         } else {
 
-            // set absolute position to controls and set the offset
+            // Set absolute position to controls and set the offset
             $controls.css({ position: "absolute" });
 
-            // add class to controls
+            // Add class to controls
             $controls.addClass("jQuery-image-upload-controls");
 
-            // append controls to body
+            // Append controls to body
             $("body").append($controls.hide());
 
-            // self on mouse enter
+            // Self on mouse enter
             $self.on("mouseenter", function () {
 
                 if ($self.hasClass("loading")) {
                     return;
                 }
 
-                // get the self offset
+                // Get the self offset
                 var offset = $self.offset();
 
-                // set control possition
+                // Set control possition
                 $controls.css({
                     top: offset.top,
                     left: offset.left
                 });
 
-                // show controls
+                // Show controls
                 $controls.show();
             });
 
-            // on mouse leave
+            // On mouse leave
             $("body").on("mouseleave", "." + settings.addClass, function (e) {
 
-                // get position, width and height
+                // Get position, width and height
                 var o = $self.offset();
                 var w = $self.width();
                 var h = $self.height();
 
-                // hide controls
+                // Hide controls
                 if ((e.pageX < o.left || e.pageX > o.left + w) ||
                     (e.pageY < o.top || e.pageY > o.top + h)) {
                     $controls.hide();
@@ -315,27 +315,27 @@
             });
         }
 
-        // destroy
+        // Destroy
         $self.on("imageUpload.destroy", function () {
 
-            // remove controls
+            // Remove controls
             $controls.remove();
 
-            // remove events
+            // Remove events
             $self.off("imageUpload.destroy");
             $self.off("imageUpload.reload");
 
-            // remove data
+            // Remove data
             $self.data("imageUpload", null);
         });
 
-        // reload
+        // Reload
         $self.on("imageUpload.reload", function () {
             $self.trigger("imageUpload.destroy");
             $self.imageUpload(options);
         });
 
-        // return selected element
+        // Return selected element
         return $self;
     }
 
@@ -377,7 +377,7 @@
         });
     };
 
-    // defaults
+    // Defaults
     $.imageUpload = $.fn.imageUpload;
     $.imageUpload.defaults = defaults;
 })($);
