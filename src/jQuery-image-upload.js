@@ -8,8 +8,7 @@
  *
  *      $("img").imageUpload();
  *
- *  Copyright (c) jillix GmbH
- *  License: MIT License
+ *  Released with <3 and JavaScript by the @jillix developers.
  *
  * */
 (function ($) {
