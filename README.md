@@ -12,6 +12,9 @@ $(".image").imageUpload({
 });
 ```
 
+## Available on CDN
+This library is available on [CDNJS](https://cdnjs.com/libraries/jquery-image-upload).
+
 ## Documentation
 
 ### Options
