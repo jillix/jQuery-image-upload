@@ -227,14 +227,14 @@
                 // The selected file was not a valid image and `result` is not a URL
                 if (!/^https?|^\//.test(result)) {
                     loadImage($self, oldSrc);
-                    $self.trigger("imageUpload.uploadFailed");
+                    $self.trigger("imageUpload.uploadFailed", [result]);
                     return;
                 }
 
                 // If no result, return
                 if (!result) {
                     loadImage($self, oldSrc);
-                    $self.trigger("imageUpload.uploadFailed");
+                    $self.trigger("imageUpload.uploadFailed", [result]);
                     return;
                 }
 
