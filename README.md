@@ -167,15 +167,15 @@ The plugin emits the following events:
     <tbody>
         <tr>
             <td>imageUpload.reload</td>
-            <td>Destroy and init the plugin</td>
+            <td>Destroys and inits the plugin</td>
         </tr>
         <tr>
             <td>imageUpload.imageChanged</td>
-            <td>Ocures after the source of the image was changed (the image was sucessfully uploaded)</td>
+            <td>Ocurrs after the source of the image was changed (the image was sucessfully uploaded)</td>
         </tr>
         <tr>
-            <td>imageUpload.imageChanged</td>
-            <td>Ocures after the source of the image was changed (the image was sucessfully uploaded)</td>
+            <td>imageUpload.uploadFailed</td>
+            <td>This event is emitted when the image upload failed. If there is an error, you can get that too: <code>on("imageUpload.uploadFailed", function (ev, err) {...})</code></td>
         </tr>
         <tr>
             <td>imageUpload.destroy</td>
